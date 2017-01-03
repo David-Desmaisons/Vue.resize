@@ -30,7 +30,7 @@ export default {
       this.list.push({name: 'Jimmy', id: count++})
     },
     onResize () {
-      alert('Element resize')
+      alert('Element resize'+ this.list.length)
     }
   }
 }

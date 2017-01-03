@@ -1,8 +1,7 @@
+import {ResizeSensor} from 'css-element-queries'
+
 export default {
-    inserted (el, binding){
-    },
-    componentUpdated (el, binding){      
-    },
-    unbind (el, binding) {
+    inserted (el, {value}) {
+        ResizeSensor(el, () => value(el))
     }
 }
