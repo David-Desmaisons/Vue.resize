@@ -1,7 +1,7 @@
-import {ResizeSensor} from 'css-element-queries'
+import resizeSensor from 'resizeSensor'
 
 export default {
     inserted (el, {value}) {
-        ResizeSensor(el, () => value(el))
+        resizeSensor(el, () => value(el))
     }
 }

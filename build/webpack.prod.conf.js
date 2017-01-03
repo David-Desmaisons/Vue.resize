@@ -29,11 +29,11 @@ var webpackConfig = merge(baseWebpackConfig, {
       commonjs: 'vue',
       amd: 'vue'
     },
-    "imagesLoaded": {
-      root: 'imagesLoaded',
-      commonjs2: 'imagesLoaded',
-      commonjs: 'imagesLoaded',
-      amd: 'imagesLoaded'
+    "resizeSensor": {
+      root: 'ResizeSensor',
+      commonjs2: 'css-element-queries/src/ResizeSensor.js',
+      commonjs: 'css-element-queries/src/ResizeSensor.js',
+      amd: 'css-element-queries/src/ResizeSensor.js'
     }
   },
   vue: {
