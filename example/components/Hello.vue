@@ -1,15 +1,33 @@
 <template>
   <div class="hello">
-    <div> 
-      <b>Resize count : {{resizeCount}} </b>  
-    </div>
-    <div class="resizable ui-widget-content" v-resize="onResize">
-        <div v-for="element in list" :key="element.id">
-          {{element.name}} <br>
-          {{element.id}}
+     <div class="container"> 
+        <div> 
+            <div> 
+              <b>Resize count : {{resizeCount}} </b>    
+            </div>
+          <div class="resizable ui-widget-content" v-resize="onResize">
+            Standard
+          </div>
+        </div>
+
+      <div> 
+          <div> 
+            <b>Resize count : {{resizeThrottleCount}} </b>  
+          </div>
+          <div class="resizable ui-widget-content" v-resize:throttle.250="onResizeThrottle">
+             <b>Throttle</b>  
+          </div>
+        </div>
+
+          <div> 
+          <div> 
+            <b>Resize count : {{resizeDebounceCount}} </b>  
+          </div>
+          <div class="resizable ui-widget-content" v-resize:debounce="onResizeDebounce">
+              <b>Debounce</b>  
+          </div>
         </div>
     </div>
-    <button @click="addItem">Add item</button>
   </div>
 </template>
 
@@ -17,9 +35,6 @@
 import resize from '../../src/Vueresize'
 import $ from 'jquery'
 import jquery_ui from 'jquery-ui/ui/widgets/resizable.js'
-
-const names= ['John', 'Ringo', 'Paul', 'George']
-let count =5
 
 export default {
   directives: {
@@ -31,15 +46,19 @@ export default {
   data () {
     return {
       resizeCount: 0,
-      list: names.map((name, id)=>{ return {name, id}})
+      resizeDebounceCount:0,
+      resizeThrottleCount:0
     }
   },
   methods:{
-    addItem () {
-      this.list.push({name: 'Jimmy', id: count++})
-    },
     onResize () {
       this.resizeCount++;
+    },
+    onResizeDebounce () {
+      this.resizeDebounceCount++;
+    },
+     onResizeThrottle () {
+      this.resizeThrottleCount++;
     }
   }
 }
@@ -55,7 +74,16 @@ export default {
   border: 2px solid #b6b5b4;
 }
 
+.container{
+  display: flex;
+  justify-content: space-around;
+}
+
 .resizable {
   overflow: hidden;
+  background: green !important;
+  min-height: 200px;
+  min-width: 200px;
+  text-align: center;
 }
 </style>
