@@ -82,8 +82,8 @@ export default {
 .resizable {
   overflow: hidden;
   background: green !important;
-  min-height: 200px;
-  min-width: 200px;
+  height: 200px;
+  width: 200px;
   text-align: center;
 }
 </style>
