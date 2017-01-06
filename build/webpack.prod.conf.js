@@ -20,7 +20,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     filename: 'Vueresize.js',
     library: 'Vueresize',
-    libraryTarget: "umd"
+    libraryTarget: "commonjs2"
   },
   externals: {
     "vue": {
@@ -34,6 +34,12 @@ var webpackConfig = merge(baseWebpackConfig, {
       commonjs2: 'css-element-queries/src/ResizeSensor.js',
       commonjs: 'css-element-queries/src/ResizeSensor.js',
       amd: 'css-element-queries/src/ResizeSensor.js'
+    },
+    "lodash.debounce": {
+      root: '_.debounce',
+      commonjs2: 'lodash.debounce',
+      commonjs: 'lodash.debounce',
+      amd: 'lodash.debounce'
     }
   },
   vue: {
