@@ -1,6 +1,7 @@
 import resizeSensor from 'resizeSensor'
-import debounce from 'lodash.debounce'
+import lodashDebounce from 'lodash.debounce'
 
+const { debounce = lodashDebounce } = lodashDebounce
 const delay = 150
 
 function getDelay (modifiers) {

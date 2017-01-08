@@ -36,7 +36,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       amd: 'css-element-queries/src/ResizeSensor.js'
     },
     "lodash.debounce": {
-      root: '_.debounce',
+      root: '_',
       commonjs2: 'lodash.debounce',
       commonjs: 'lodash.debounce',
       amd: 'lodash.debounce'
