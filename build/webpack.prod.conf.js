@@ -20,7 +20,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     path: config.build.assetsRoot,
     filename: 'Vueresize.js',
     library: 'Vueresize',
-    libraryTarget: "commonjs2"
+    libraryTarget: "umd"
   },
   externals: {
     "vue": {

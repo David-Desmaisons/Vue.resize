@@ -6,7 +6,7 @@
               <b>Resize count : {{resizeCount}} </b>    
             </div>
           <div class="resizable ui-widget-content" v-resize="onResize">
-            Standard
+            <b>Standard</b>
           </div>
         </div>
 
@@ -84,6 +84,7 @@ export default {
   background: green !important;
   height: 200px;
   width: 200px;
-  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
 }
 </style>
