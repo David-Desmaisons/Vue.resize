@@ -22,26 +22,26 @@ Use throttle when you need to rate-limit resize events frequency.
 
 
 * With default timeout (150 ms):
-```javascript
-<div v-resize.throttle="onResize">
+```HTML
+<div v-resize:throttle="onResize">
 ```
 
 * With custom timeout (in ms):
-```javascript
-<div v-resize.throttle.100="onResize">
+```HTML
+<div v-resize:throttle.100="onResize">
 ```
 
 ### Debounce
 Use debounce when you only need to be notified when resize events ends.
 
 * With default timeout (150 ms):
-```javascript
-<div v-resize.debounce="onResize">
+```HTML
+<div v-resize:debounce="onResize">
 ```
 
 * With custom timeout (in ms):
-```javascript
-<div v-resize.debounce.50="onResize">
+```HTML
+<div v-resize:debounce.50="onResize">
 ```
 
 
@@ -52,7 +52,7 @@ Use debounce when you only need to be notified when resize events ends.
  npm install vue-resize-directive --save
 ```
 
-- #### For Modules
+- For Modules
 
 ``` js
 // ES6
