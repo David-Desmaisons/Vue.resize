@@ -64,6 +64,10 @@ export default {
 }
 </script>
 <style>
+text{
+  font-size: 20px;
+}
+
 .item {
   background-color: #eee;
   padding: 10px;
@@ -77,6 +81,7 @@ export default {
 .container{
   display: flex;
   justify-content: space-around;
+  font-size: x-large;
 }
 
 .resizable {
