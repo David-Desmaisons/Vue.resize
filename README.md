@@ -49,14 +49,14 @@ Use debounce when you only need to be notified when resize events ends.
 
 - Available through npm:
 ``` js
- npm install vue-resize --save
+ npm install vue-resize-directive --save
 ```
 
 - #### For Modules
 
 ``` js
 // ES6
-import resize from 'vue-resize'
+import resize from 'vue-resize-directive'
 //...
 export default {
     directives: {
@@ -65,7 +65,7 @@ export default {
 //...
   
 // ES5
-var resize = require('ResizeSensor')
+var resize = require('vue-resize-directive')
 ```
 
 - #### For `<script>` Include
