@@ -4,8 +4,8 @@ import lodashDebounce from 'lodash.debounce'
 const { debounce = lodashDebounce } = lodashDebounce
 const delay = 150
 
-function getDelay (modifiers) {
-    if (!modifiers){
+function getDelay(modifiers) {
+    if (!modifiers) {
         return delay
     }
     const keys = Object.keys(modifiers)
@@ -13,16 +13,19 @@ function getDelay (modifiers) {
 }
 
 export default {
-    inserted (el, {value, arg, modifiers}) {
+    inserted(el, { value, arg, modifiers }) {
+        if (!value) {
+            console.warn('method or v-resize is not implemented as to $el')
+        }
         let callBack = () => value(el)
         switch (arg) {
             case 'debounce':
-                callBack = debounce(()=>value(el), getDelay(modifiers))
+                callBack = debounce(() => value(el), getDelay(modifiers))
                 break
 
             case 'throttle':
                 const delay = getDelay(modifiers)
-                callBack = debounce(()=>value(el), delay, {leading: true, trailing: true, maxWait: delay})
+                callBack = debounce(() => value(el), delay, { leading: true, trailing: true, maxWait: delay })
                 break
         }
         const resizeSensor = new ResizeSensor(el, callBack)
