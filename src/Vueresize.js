@@ -1,4 +1,4 @@
-import resizeSensor from 'resizeSensor'
+import ResizeSensor from 'resizeSensor'
 import lodashDebounce from 'lodash.debounce'
 
 const { debounce = lodashDebounce } = lodashDebounce
@@ -25,6 +25,6 @@ export default {
                 callBack = debounce(()=>value(el), delay, {leading: true, trailing: true, maxWait: delay})
                 break
         }
-        resizeSensor(el, callBack)
+        const resizeSensor = new ResizeSensor(el, callBack)
     }
 }
