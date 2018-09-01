@@ -1,70 +1,88 @@
 <template>
   <div class="hello">
-     <div class="container"> 
-        <div> 
-            <div> 
-              <b>Resize count : {{resizeCount}} </b>    
-            </div>
-          <div class="resizable ui-widget-content" v-resize="onResize">
-            <b>Standard</b>
-          </div>
+    <div class="container">
+      <div>
+        <div>
+          <b>Resize count : {{resizeCount}} </b>
         </div>
+        <div class="resizable ui-widget-content" v-resize="onResize">
+          <b>Standard</b>
+        </div>
+      </div>
 
-      <div> 
-          <div> 
-            <b>Resize count : {{resizeThrottleCount}} </b>  
-          </div>
-          <div class="resizable ui-widget-content" v-resize:throttle.250="onResizeThrottle">
-             <b>Throttle</b>  
-          </div>
+      <div>
+        <div>
+          <b>Resize count : {{resizeThrottleCount}} </b>
         </div>
+        <div class="resizable ui-widget-content" v-resize:throttle.250="onResizeThrottle">
+          <b>Throttle</b>
+        </div>
+      </div>
 
-          <div> 
-          <div> 
-            <b>Resize count : {{resizeDebounceCount}} </b>  
-          </div>
-          <div class="resizable ui-widget-content" v-resize:debounce="onResizeDebounce">
-              <b>Debounce</b>  
-          </div>
+      <div>
+        <div>
+          <b>Resize count : {{resizeDebounceCount}} </b>
         </div>
+        <div class="resizable ui-widget-content" v-resize:debounce="onResizeDebounce">
+          <b>Debounce</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div>
+        <div>
+          <b>Show: {{show}}</b><br/>
+          <input type="checkbox" v-model="show" /><br/>
+          <b>Resize count : {{resizeShowCount}} </b>
+        </div>
+        <div class="resizable ui-widget-content" v-resize="onResizeShow" v-show="show">
+          <b>Show</b>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import resize from '../../src/Vueresize'
-import $ from 'jquery'
-import jquery_ui from 'jquery-ui/ui/widgets/resizable.js'
+import resize from "../../src/Vueresize";
+import $ from "jquery";
+import jquery_ui from "jquery-ui/ui/widgets/resizable.js";
 
 export default {
   directives: {
     resize
   },
   mounted() {
-    $('.resizable').resizable()
+    $(".resizable").resizable();
   },
-  data () {
+  data() {
     return {
       resizeCount: 0,
-      resizeDebounceCount:0,
-      resizeThrottleCount:0
-    }
+      resizeDebounceCount: 0,
+      resizeThrottleCount: 0,
+      resizeShowCount: 0,
+      show: false
+    };
   },
-  methods:{
-    onResize () {
+  methods: {
+    onResize() {
       this.resizeCount++;
     },
-    onResizeDebounce () {
+    onResizeDebounce() {
       this.resizeDebounceCount++;
     },
-     onResizeThrottle () {
+    onResizeThrottle() {
       this.resizeThrottleCount++;
+    },
+    onResizeShow() {
+      this.resizeShowCount++;
     }
   }
-}
+};
 </script>
 <style>
-text{
+text {
   font-size: 20px;
 }
 
@@ -78,7 +96,7 @@ text{
   border: 2px solid #b6b5b4;
 }
 
-.container{
+.container {
   display: flex;
   justify-content: space-around;
   font-size: x-large;
