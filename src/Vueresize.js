@@ -45,9 +45,9 @@ function createResizeSensor(el, { value, arg, modifiers }) {
   }
 
   const res = new ResizeSensor(el, callBack);
-  // if (options.initial) {
-  //   value(el);
-  // }
+  if (options.initial) {
+    value(el);
+  }
   return res;
 }
 

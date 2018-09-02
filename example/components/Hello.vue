@@ -36,7 +36,6 @@
         </div>
         <div class="resizable ui-widget-content throttle" v-resize:throttle.initial.1000="onResizeInitial">
           <b>Initial</b>
-          <b>With Throttle</b>
         </div>
       </div>
 

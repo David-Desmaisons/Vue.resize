@@ -7,7 +7,7 @@
 [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 [![MIT License](https://img.shields.io/github/license/David-Desmaisons/Vue.resize.svg)](https://github.com/David-Desmaisons/Vue.resize/blob/master/LICENSE)
 
-Vue directive to detect HTML resize events based on [CSS Element Queries](https://github.com/marcj/css-element-queries) with deboucing and throttling capacity.
+Vue directive to detect HTML resize events based on [CSS Element Queries](https://github.com/marcj/css-element-queries) with debouncing and throttling capacity.
 
 ## Demo
 
@@ -18,6 +18,8 @@ Vue directive to detect HTML resize events based on [CSS Element Queries](https:
 
 ### Simple
 Use this option when you need to receive all the resize events.
+
+The `onResize` function will be called each time the element resizes with the corresponding HTML element as only argument.
 
 ```javascript
 <div v-resize="onResize">
@@ -50,6 +52,12 @@ Use debounce when you only need to be notified when resize events ends.
 <div v-resize:debounce.50="onResize">
 ```
 
+### Initial
+Use this option to receive the resize callback right after the element is mounted on the DOM and visible.
+
+```HTML
+<div v-resize.initial="onResize">
+```
 
 ## Installation
 
