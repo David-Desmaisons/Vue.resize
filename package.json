@@ -4,7 +4,8 @@
   "description": "Vue.js 2.0 directive to detect element resize",
   "main": "dist/Vueresize.js",
   "files": [
-    "dist/Vueresize.js"
+    "dist/Vueresize.js",
+    "dist/Vueresize.js.map"
   ],
   "keywords": [
     "vue",

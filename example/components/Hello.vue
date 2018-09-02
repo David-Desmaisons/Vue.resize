@@ -14,7 +14,7 @@
         <div>
           <b>Resize count : {{resizeThrottleCount}} </b>
         </div>
-        <div class="resizable ui-widget-content" v-resize:throttle.250="onResizeThrottle">
+        <div class="resizable ui-widget-content throttle" v-resize:throttle.250="onResizeThrottle">
           <b>Throttle</b>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div>
           <b>Resize count : {{resizeDebounceCount}} </b>
         </div>
-        <div class="resizable ui-widget-content" v-resize:debounce="onResizeDebounce">
+        <div class="resizable ui-widget-content debounce" v-resize:debounce="onResizeDebounce">
           <b>Debounce</b>
         </div>
       </div>
@@ -32,8 +32,18 @@
     <div class="container">
       <div>
         <div>
-          <b>Show: {{show}}</b><br/>
-          <input type="checkbox" v-model="show" /><br/>
+          <b>Resize count : {{resizeInitialCount}} </b>
+        </div>
+        <div class="resizable ui-widget-content throttle" v-resize:throttle.initial.1000="onResizeInitial">
+          <b>Initial</b>
+          <b>With Throttle</b>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label>Show: <input type="checkbox" v-model="show" /></label>
+          
           <b>Resize count : {{resizeShowCount}} </b>
         </div>
         <div class="resizable ui-widget-content" v-resize="onResizeShow" v-show="show">
@@ -41,6 +51,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -62,6 +73,7 @@ export default {
       resizeDebounceCount: 0,
       resizeThrottleCount: 0,
       resizeShowCount: 0,
+      resizeInitialCount: 0,
       show: false
     };
   },
@@ -77,6 +89,9 @@ export default {
     },
     onResizeShow() {
       this.resizeShowCount++;
+    },
+    onResizeInitial() {
+      this.resizeInitialCount++;
     }
   }
 };
@@ -100,6 +115,14 @@ text {
   display: flex;
   justify-content: space-around;
   font-size: x-large;
+}
+
+.resizable.throttle {
+  background: blue !important;
+}
+
+.resizable.debounce {
+  background: yellow !important;
 }
 
 .resizable {

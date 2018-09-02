@@ -2,41 +2,60 @@ import ResizeSensor from 'resizeSensor'
 import lodashDebounce from 'lodash.debounce'
 
 const { debounce = lodashDebounce } = lodashDebounce;
-const delay = 150;
+const defaultDelay = 150;
 
-function getDelay(modifiers) {
+function getOptions(modifiers) {
   if (!modifiers) {
-    return delay;
+    return { delay: defaultDelay, initial: false }
   }
-  const keys = Object.keys(modifiers);
-  return (keys.length) ? Number(keys[0]) : delay;
+  const { initial = false } = modifiers;
+  let delay = Object.keys(modifiers).map(k => parseInt(k)).find(v => !isNaN(v));
+  delay = delay || defaultDelay;
+  return { delay, initial }
+}
+
+function getDisplay(element) {
+  const { display } = element.style;
+  if (display) {
+    return display;
+  }
+  const style = element.currentStyle
+    ? element.currentStyle
+    : getComputedStyle(element, null);
+  return style.display;
 }
 
 function createResizeSensor(el, { value, arg, modifiers }) {
   if (el.resizeSensor) {
     return;
   }
-  if (el.style.display === 'none') {
+  if (getDisplay(el) === 'none') {
     return;
   }
   let callBack = () => value(el);
+  const options = getOptions(modifiers);
   switch (arg) {
     case 'debounce':
-      callBack = debounce(() => value(el), getDelay(modifiers));
+      callBack = debounce(() => value(el), options.delay);
       break;
 
     case 'throttle':
-      const delay = getDelay(modifiers)
-      callBack = debounce(() => value(el), delay, { leading: true, trailing: true, maxWait: delay });
+      callBack = debounce(() => value(el), options.delay, { leading: true, trailing: true, maxWait: options.delay });
       break;
   }
-  return new ResizeSensor(el, callBack);
+
+  const res = new ResizeSensor(el, callBack);
+  // if (options.initial) {
+  //   value(el);
+  // }
+  return res;
 }
 
 export default {
   inserted(el, { value, arg, modifiers }) {
-    if (!value) {
-      console.warn('method or v-resize is not implemented as to $el');
+    if (!value || typeof value !== 'function') {
+      console.warn('v-resize should received a function as value');
+      return;
     }
     createResizeSensor(el, { value, arg, modifiers });
   },
