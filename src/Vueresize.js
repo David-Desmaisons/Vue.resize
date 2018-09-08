@@ -61,5 +61,11 @@ export default {
   },
   componentUpdated(el, { value, arg, modifiers }) {
     createResizeSensor(el, { value, arg, modifiers });
+  },
+  unbind(el) {
+    if (!el.resizeSensor) {
+      return;
+    }
+    ResizeSensor.detach(el);
   }
 }

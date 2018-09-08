@@ -42,11 +42,22 @@
       <div>
         <div>
           <label>Show: <input type="checkbox" v-model="show" /></label>
-          
+
           <b>Resize count : {{resizeShowCount}} </b>
         </div>
         <div class="resizable ui-widget-content" v-resize="onResizeShow" v-show="show">
           <b>Show</b>
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label>If: <input type="checkbox" v-model="display" /></label>
+
+          <b>Resize count : {{resizeIfCount}} </b>
+        </div>
+        <div class="resizable ui-widget-content" v-resize="onResizeIf" v-if="display">
+          <b>If</b>
         </div>
       </div>
     </div>
@@ -72,8 +83,10 @@ export default {
       resizeDebounceCount: 0,
       resizeThrottleCount: 0,
       resizeShowCount: 0,
+      resizeIfCount: 0,
       resizeInitialCount: 0,
-      show: false
+      show: false,
+      display: false
     };
   },
   methods: {
@@ -91,6 +104,9 @@ export default {
     },
     onResizeInitial() {
       this.resizeInitialCount++;
+    },
+    onResizeIf () {
+      this.resizeIfCount++;
     }
   }
 };
