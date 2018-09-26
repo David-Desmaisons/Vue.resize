@@ -1,5 +1,6 @@
 import ResizeSensor from 'resizeSensor'
 import lodashDebounce from 'lodash.debounce'
+require('./findPolyfill');
 
 const { debounce = lodashDebounce } = lodashDebounce;
 const defaultDelay = 150;
@@ -14,24 +15,7 @@ function getOptions(modifiers) {
   return { delay, initial }
 }
 
-function getDisplay(element) {
-  const { display } = element.style;
-  if (display) {
-    return display;
-  }
-  const style = element.currentStyle
-    ? element.currentStyle
-    : getComputedStyle(element, null);
-  return style.display;
-}
-
 function createResizeSensor(el, { value, arg, modifiers }) {
-  if (el.resizeSensor) {
-    return;
-  }
-  if (getDisplay(el) === 'none') {
-    return;
-  }
   let callBack = () => value(el);
   const options = getOptions(modifiers);
   switch (arg) {
@@ -57,9 +41,6 @@ export default {
       console.warn('v-resize should received a function as value');
       return;
     }
-    createResizeSensor(el, { value, arg, modifiers });
-  },
-  componentUpdated(el, { value, arg, modifiers }) {
     createResizeSensor(el, { value, arg, modifiers });
   },
   unbind(el) {
