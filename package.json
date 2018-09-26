@@ -16,10 +16,10 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "prepublishOnly" : "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "css-element-queries": "^0.4.0",
+    "css-element-queries": "^1.0.2",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
