@@ -19,7 +19,7 @@ function getOptions(modifiers) {
 function listenToVisible(element, callback) {
   const options = {
     root: document.documentElement
-  }
+  };
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -34,9 +34,8 @@ function listenToVisible(element, callback) {
   return observer;
 }
 
-function createResizeSensor(el, { value, arg, modifiers }) {
+function createResizeSensor(el, { value, arg, options }) {
   let callBack = () => value(el);
-  const options = getOptions(modifiers);
   switch (arg) {
     case 'debounce':
       callBack = debounce(() => value(el), options.delay);
@@ -60,11 +59,13 @@ export default {
       console.warn('v-resize should received a function as value');
       return;
     }
+    const options = getOptions(modifiers);
     if (el.offsetParent) {
-      createResizeSensor(el, { value, arg, modifiers });
+      createResizeSensor(el, { value, arg, options });
       return;
     }
-    el.__visibility__listener__ = listenToVisible(el, () => createResizeSensor(el, { value, arg, modifiers }))
+    options.initial = true;
+    el.__visibility__listener__ = listenToVisible(el, () => createResizeSensor(el, { value, arg, options }));
   },
   unbind(el) {
     if (el.__visibility__listener__) {
