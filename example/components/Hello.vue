@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
-    <div class="container">
+    <label>Show examples: <input type="checkbox" v-model="showExample" /></label>
+
+    <div class="container" v-show="showExample">
       <div>
         <div>
           <b>Resize count : {{resizeCount}} </b>
@@ -29,7 +31,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container" v-show="showExample">
       <div>
         <div>
           <b>Resize count : {{resizeInitialCount}} </b>
@@ -86,7 +88,8 @@ export default {
       resizeIfCount: 0,
       resizeInitialCount: 0,
       show: false,
-      display: false
+      display: false,
+      showExample: false
     };
   },
   methods: {
