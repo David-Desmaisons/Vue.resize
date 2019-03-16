@@ -1,13 +1,35 @@
 <template>
   <div class="hello">
-    <label>Show examples: <input type="checkbox" v-model="showExample" /></label>
+    <label>Show examples: <input
+        type="checkbox"
+        v-model="showExample"
+      /></label>
 
-    <div class="container" v-show="showExample">
+    <div
+      class="container"
+      v-show="showExample"
+    >
+
+      <div>
+        <div class="resizable ui-widget-content keep-alive">
+          <select v-model="component">
+            <option>dummy</option>
+            <option>counter</option>
+          </select>
+          <keep-alive>
+            <component :is="component"></component>
+          </keep-alive>
+        </div>
+      </div>
+
       <div>
         <div>
           <b>Resize count : {{resizeCount}} </b>
         </div>
-        <div class="resizable ui-widget-content" v-resize="onResize">
+        <div
+          class="resizable ui-widget-content standard"
+          v-resize="onResize"
+        >
           <b>Standard</b>
         </div>
       </div>
@@ -16,7 +38,10 @@
         <div>
           <b>Resize count : {{resizeThrottleCount}} </b>
         </div>
-        <div class="resizable ui-widget-content throttle" v-resize:throttle.250="onResizeThrottle">
+        <div
+          class="resizable ui-widget-content throttle"
+          v-resize:throttle.250="onResizeThrottle"
+        >
           <b>Throttle</b>
         </div>
       </div>
@@ -25,40 +50,63 @@
         <div>
           <b>Resize count : {{resizeDebounceCount}} </b>
         </div>
-        <div class="resizable ui-widget-content debounce" v-resize:debounce="onResizeDebounce">
+        <div
+          class="resizable ui-widget-content debounce"
+          v-resize:debounce="onResizeDebounce"
+        >
           <b>Debounce</b>
         </div>
       </div>
     </div>
 
-    <div class="container" v-show="showExample">
+    <div
+      class="container"
+      v-show="showExample"
+    >
       <div>
         <div>
           <b>Resize count : {{resizeInitialCount}} </b>
         </div>
-        <div class="resizable ui-widget-content throttle" v-resize:throttle.initial.1000="onResizeInitial">
+        <div
+          class="resizable ui-widget-content throttle"
+          v-resize:throttle.initial.1000="onResizeInitial"
+        >
           <b>Initial</b>
         </div>
       </div>
 
       <div>
         <div>
-          <label>Show: <input type="checkbox" v-model="show" /></label>
+          <label>Show: <input
+              type="checkbox"
+              v-model="show"
+            /></label>
 
           <b>Resize count : {{resizeShowCount}} </b>
         </div>
-        <div class="resizable ui-widget-content" v-resize="onResizeShow" v-show="show">
+        <div
+          class="resizable ui-widget-content"
+          v-resize="onResizeShow"
+          v-show="show"
+        >
           <b>Show</b>
         </div>
       </div>
 
       <div>
         <div>
-          <label>If: <input type="checkbox" v-model="display" /></label>
+          <label>If: <input
+              type="checkbox"
+              v-model="display"
+            /></label>
 
           <b>Resize count : {{resizeIfCount}} </b>
         </div>
-        <div class="resizable ui-widget-content" v-resize="onResizeIf" v-if="display">
+        <div
+          class="resizable ui-widget-content"
+          v-resize="onResizeIf"
+          v-if="display"
+        >
           <b>If</b>
         </div>
       </div>
@@ -69,10 +117,16 @@
 
 <script>
 import resize from "../../src/Vueresize";
+import dummy from "./dummy";
+import counter from "./counter";
 import $ from "jquery";
 import jquery_ui from "jquery-ui/ui/widgets/resizable.js";
 
 export default {
+  components: {
+    dummy,
+    counter
+  },
   directives: {
     resize
   },
@@ -81,6 +135,7 @@ export default {
   },
   data() {
     return {
+      component: "dummy",
       resizeCount: 0,
       resizeDebounceCount: 0,
       resizeThrottleCount: 0,
@@ -108,7 +163,7 @@ export default {
     onResizeInitial() {
       this.resizeInitialCount++;
     },
-    onResizeIf () {
+    onResizeIf() {
       this.resizeIfCount++;
     }
   }
@@ -136,16 +191,24 @@ text {
 }
 
 .resizable.throttle {
-  background: blue !important;
+  background: blue;
 }
 
 .resizable.debounce {
-  background: yellow !important;
+  background: yellow;
+}
+
+.resizable.keep-alive {
+  background: grey;
+}
+
+.resizable.standard {
+  background: green;
 }
 
 .resizable {
   overflow: hidden;
-  background: green !important;
+  background: green;
   height: 200px;
   width: 200px;
   vertical-align: middle;

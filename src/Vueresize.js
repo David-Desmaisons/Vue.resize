@@ -53,27 +53,39 @@ function createResizeSensor(el, { value, arg, options }) {
   return res;
 }
 
-export default {
-  inserted(el, { value, arg, modifiers }) {
-    if (!value || typeof value !== 'function') {
-      console.warn('v-resize should received a function as value');
-      return;
-    }
-    const options = getOptions(modifiers);
-    if (el.offsetParent) {
-      createResizeSensor(el, { value, arg, options });
-      return;
-    }
-    options.initial = true;
-    el.__visibility__listener__ = listenToVisible(el, () => createResizeSensor(el, { value, arg, options }));
-  },
-  unbind(el) {
-    if (el.__visibility__listener__) {
-      el.__visibility__listener__.disconnect();
-    }
-    if (!el.resizeSensor) {
-      return;
-    }
-    ResizeSensor.detach(el);
+function inserted(el, { value, arg, modifiers }, { context: component }) {
+  if (!value || typeof value !== 'function') {
+    console.warn('v-resize should received a function as value');
+    return;
   }
+  const options = getOptions(modifiers);
+  if (component && component.$el === el) {
+    component.$once("hook:deactivated", () => {
+      unbind(el);
+      component.$once("hook:activated", () => {
+        inserted(el, { value, arg, modifiers }, { context: component });
+      })
+    })
+  }
+  if (el.offsetParent) {
+    createResizeSensor(el, { value, arg, options });
+    return;
+  }
+  options.initial = true;
+  el.__visibility__listener__ = listenToVisible(el, () => createResizeSensor(el, { value, arg, options }));
+};
+
+function unbind(el) {
+  if (el.__visibility__listener__) {
+    el.__visibility__listener__.disconnect();
+  }
+  if (!el.resizeSensor) {
+    return;
+  }
+  ResizeSensor.detach(el);
+};
+
+export default {
+  inserted,
+  unbind
 }
