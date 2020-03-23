@@ -1,7 +1,5 @@
 import ResizeSensor from 'resizeSensor'
 import lodashDebounce from 'lodash.debounce'
-require('./findPolyfill');
-require('intersection-observer');
 
 const { debounce = lodashDebounce } = lodashDebounce;
 const defaultDelay = 150;
