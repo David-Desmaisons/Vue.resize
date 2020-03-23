@@ -5,8 +5,11 @@
   "main": "dist/Vueresize.js",
   "files": [
     "dist/Vueresize.js",
-    "dist/Vueresize.js.map"
+    "dist/Vueresize.js.map",
+    "types/index.d.ts",
+    "types/vueresize.d.ts"
   ],
+  "types": "types/index.d.ts",
   "keywords": [
     "vue",
     "vuejs",
