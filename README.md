@@ -77,7 +77,7 @@ export default {
         resize,
     }
 //...
-  
+
 // ES5
 var resize = require('vue-resize-directive')
 ```
@@ -85,3 +85,12 @@ var resize = require('vue-resize-directive')
 - #### For `<script>` Include
 
   Just include `Vueresize.js` after `ResizeSensor.js` from [css-element-queries](https://github.com/marcj/css-element-queries) and `lodash.js` script.<br>
+
+## Polyfills
+
+> :warning: Should you require compatibility with older browsers (most notably, IE), make sure to include the following (or equivalent) polyfills: [`Array.prototype.find` polyfill](https://github.com/jsPolyfill/Array.prototype.find) and[`IntersectionObserver` polyfill](https://github.com/w3c/IntersectionObserver/tree/master/polyfill).
+
+This package used to include it's own polyfills for `Array.prototype.find` and `IntersectionObserver`.
+As per the recommendations of the Vue Cli developers guide, polyfills are no longer shipped as part of this repository.
+
+Read more about this subject [here](https://cli.vuejs.org/guide/browser-compatibility.html#polyfills-when-building-as-library-or-web-components).
